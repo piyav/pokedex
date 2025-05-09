@@ -5,10 +5,25 @@ import "./App.css";
 
 function App() {
   const [search, setSearch]=useState("");
-  const makeSearch = (e) => {
+  const [ pokemon, setPokemon] = useState(null);
+  const [error, setError] = useState("");
+  const handleSearch = async (e) => {
     e.preventDefault();
-    alert(`You searched for: ${search}`);
-  }
+    if (!search) return;
+
+    try{
+      const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${search.toLowerCase()}`);
+      if (!res.ok) throw new Error("Pokemon not found");
+
+      const data = await res.json();
+      setPokemon(data);
+      setError("");
+    }
+    catch(err){
+      setPokemon(null);
+      setError("Pokemon not found. Try again!");
+    }
+   };
   return (
     <div className="App">
       <header className="App-header">
@@ -16,7 +31,7 @@ function App() {
         <p>
           PokeDex
         </p>
-        <form onSubmit={makeSearch}>
+        <form onSubmit={handleSearch}>
           <input
             type="text"
             placeholder="Search Pokémon..."
@@ -37,18 +52,28 @@ function App() {
             Search
           </button>
         </form>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        {pokemon && (
+          <div style = {{marginTop: "20px", backgroundColor: "#fff", padding: "20px", borderRadius: "10px", color: "#000" }}>
+            <h2>{pokemon.name.toUpperCase()}</h2>
+            <p>Type: {pokemon.types.map(t => t.type.name).join(', ')}</p>
+            <p>Height: {pokemon.height}</p>
+            <p>Weight: {pokemon.weight}</p>
+            </div>
+        )}
+
         <a
           className="App-link"
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Hello World
+          pokedex
         </a>
       </header>
       </div>
       );
-}
+    }
 
 export default App;
 
