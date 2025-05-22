@@ -17,7 +17,7 @@
 }
 
 .rotating-pikachu {
-  height: 200px; /* Adjust size as needed */
+  height: 200px; 
   animation: rotate 5s linear infinite;
 }
 
