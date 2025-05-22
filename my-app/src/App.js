@@ -48,7 +48,7 @@ function App() {
         <form onSubmit={handleSearch}>
           <input
             type="text"
-            placeholder="Search Pokémon..."
+            placeholder="Search Pokemon..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             style={{ padding: "0.5rem", fontSize: "1rem", borderRadius: "5px" }}
