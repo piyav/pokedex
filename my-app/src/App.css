@@ -7,6 +7,20 @@
   color: #3B4CCA;
 }
 
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotating-pikachu {
+  height: 200px; /* Adjust size as needed */
+  animation: rotate 5s linear infinite;
+}
+
 .App-logo {
   height: 80px;
   margin-bottom: 1rem;
@@ -73,4 +87,10 @@ button:hover {
   to {
     transform: rotate(360deg);
   }
+}
+
+.title {
+  font-size: 5rem; 
+  font-weight: bold;
+  margin: 20px 0;
 }
